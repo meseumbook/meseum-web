@@ -1,0 +1,408 @@
+/* ---------- Fonts ---------- */
+@font-face {
+  font-family: 'Quiche Sans';
+  src: url('fonts/QuicheSans-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  /* Fontspring demo build swaps several glyphs for promo dingbats — hyphen,
+     parentheses, slash, and the digit 4 confirmed so far; restrict this face
+     to the letters/digits/space known to be safe so the fallback font in the
+     stack supplies the rest. If another swapped glyph turns up, exclude its
+     code point here too. */
+  unicode-range: U+20, U+30-33, U+35-39, U+41-5A, U+61-7A;
+}
+
+@font-face {
+  font-family: 'Quiche Sans';
+  src: url('fonts/QuicheSans-LightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+20, U+30-33, U+35-39, U+41-5A, U+61-7A;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Variable.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --dark-gray: #333333;
+}
+
+/* ---------- Reset & base ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Quiche Sans', 'Noto Sans TC', sans-serif;
+  font-weight: 300;
+  color: #1a1a1a;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* nav / menu copy: Montserrat Light, 10pt, tracking 0.1em */
+.nav-link {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-underline-offset: 6px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  transition: opacity 0.25s ease;
+}
+
+.nav-link:hover {
+  opacity: 0.55;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 26px 20px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  transition: background 0.3s ease;
+}
+
+.logo img {
+  height: 16px;
+  width: auto;
+}
+
+.menu-toggle {
+  width: 23px;
+  height: 9px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: #1a1a1a;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* ---------- Mobile nav overlay ---------- */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+}
+
+.mobile-nav.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.mobile-nav ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.mobile-nav .nav-link {
+  font-size: 15px;
+  text-decoration: none;
+}
+
+/* ---------- Hero / poem ---------- */
+.hero {
+  padding: 509px 26px 40px;
+}
+
+.hero__poem {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+/* body copy: Quiche Sans Light, 12pt, tracking 0.025em, line-height 16pt */
+.hero__poem p {
+  font-family: 'Quiche Sans', 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.025em;
+  color: #333;
+}
+
+.hero__links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 87px;
+  padding: 0 17px;
+}
+
+/* ---------- Photo banner ---------- */
+.photo-banner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.photo-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Quote section ---------- */
+.quote {
+  background: var(--dark-gray);
+  color: #d9d6d2;
+  padding: 71px 26px 88px;
+}
+
+.quote p {
+  font-family: 'Quiche Sans', 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.025em;
+}
+
+.quote__links {
+  display: flex;
+  gap: 40px;
+  margin-top: 51px;
+  padding: 0 17px;
+}
+
+.quote .nav-link {
+  color: #d9d6d2;
+}
+
+/* ---------- Footer visual ---------- */
+.footer-visual {
+  width: 100%;
+  aspect-ratio: 839 / 1130;
+  background: #000;
+  overflow: hidden;
+}
+
+.footer-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.96;
+}
+
+/* ---------- Footer accordion links (shown on every page) ---------- */
+.footer-links {
+  background: #b7b7b7;
+  padding: 68px 0 40px;
+}
+
+.footer-links__row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #333333;
+  text-transform: uppercase;
+}
+
+.footer-links__icon {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  flex: none;
+}
+
+.footer-links__icon span {
+  position: absolute;
+  background: #333333;
+}
+
+.footer-links__icon span:nth-child(1) {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.footer-links__icon span:nth-child(2) {
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  transform: translateX(-50%);
+  transition: transform 0.2s ease;
+}
+
+.footer-links__item.is-open .footer-links__icon span:nth-child(2) {
+  transform: translateX(-50%) scaleY(0);
+}
+
+.footer-links__panel {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 26px 14px;
+}
+
+.footer-links__item.is-open .footer-links__panel {
+  display: flex;
+}
+
+.footer-links__sub {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 200;
+  font-size: 12px;
+  letter-spacing: 0.025em;
+  color: #666666;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.footer-links__sub:hover {
+  color: #333333;
+}
+
+.footer-links__copyright {
+  margin-top: 40px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: #666666;
+}
+
+/* ---------- Responsive: tablet / desktop ---------- */
+@media (min-width: 700px) {
+  .site-header {
+    padding: 40px 48px 20px;
+  }
+
+  .hero {
+    padding: 200px 48px 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__poem {
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero__poem p {
+    font-size: 14px;
+  }
+
+  .hero__links {
+    max-width: 640px;
+    width: 100%;
+  }
+
+  .photo-banner,
+  .footer-visual {
+    aspect-ratio: 16 / 9;
+  }
+
+  .quote {
+    padding: 100px 48px 120px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .quote p {
+    text-align: center;
+  }
+}
+
+@media (min-width: 1080px) {
+  .photo-banner,
+  .footer-visual {
+    aspect-ratio: 21 / 9;
+  }
+}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

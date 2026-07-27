@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>購物車 — me'seum</title>
+<meta name="description" content="me'seum 購物車。">
+<link rel="icon" href="images/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Noto+Serif+TC:wght@200&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="order-detail.css?v=13">
+<link rel="stylesheet" href="cart.css?v=9">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <a href="index.html" class="logo" aria-label="me'seum">
+    <img src="images/logo.svg" alt="me'seum">
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="開啟選單" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="story.html" class="nav-link">STORY</a></li>
+    <li><a href="collection.html" class="nav-link">COLLECTION</a></li>
+    <li><a href="order.html" class="nav-link">ORDER</a></li>
+    <li><a href="cart.html" class="nav-link">CART<span data-cart-count hidden></span></a></li>
+    <li><a href="lookup.html" class="nav-link">TRACK</a></li>
+  </ul>
+</nav>
+
+<main class="cart-page" id="cartPage">
+  <h1 class="cart-page__title">購物車</h1>
+
+  <div id="cartItems"></div>
+
+  <p class="cart-empty" id="cartEmpty" hidden>購物車目前是空的。<a href="order.html">回到訂購頁面挑選款式</a></p>
+
+  <form class="order-form checkout-form" id="checkoutForm" novalidate hidden>
+    <div class="field field--text" data-field="discountCode">
+      <label class="field__row">
+        <span class="field__label">專屬折扣碼</span>
+        <input type="text" class="field__input" id="discountCode" autocomplete="off">
+      </label>
+      <p class="field__hint" id="discountHint"></p>
+    </div>
+
+    <div class="field field--text" data-field="lineName" data-required="true">
+      <label class="field__row">
+        <span class="field__label">Line名稱（非帳號ID）</span>
+        <input type="text" class="field__input" id="lineName" autocomplete="off">
+      </label>
+    </div>
+
+    <div class="field field--text" data-field="recipientName" data-required="true">
+      <label class="field__row">
+        <span class="field__label">收件人姓名</span>
+        <input type="text" class="field__input" id="recipientName" autocomplete="name">
+      </label>
+    </div>
+
+    <div class="field field--text" data-field="recipientPhone" data-required="true">
+      <label class="field__row">
+        <span class="field__label">收件人電話</span>
+        <input type="tel" class="field__input" id="recipientPhone" autocomplete="tel">
+      </label>
+    </div>
+
+    <div class="field field--accordion" data-field="shipping" data-required="true">
+      <button type="button" class="field__row">
+        <span class="field__label">配送方式</span>
+        <span class="field__value" data-empty="+"></span>
+      </button>
+      <div class="field__options">
+        <button type="button" class="option" data-type="711" data-fee="60" data-label="711店到店">711店到店 $60</button>
+        <button type="button" class="option" data-type="family" data-fee="60" data-label="全家店到店">全家店到店 $60</button>
+        <button type="button" class="option" data-type="home" data-fee="150" data-label="宅配">宅配 $150</button>
+        <button type="button" class="option" data-type="oversea" data-fee="0" data-label="海外宅配">海外宅配</button>
+      </div>
+    </div>
+
+    <div class="field field--text" data-field="shippingDetail" data-required="true" id="shippingDetailField" hidden>
+      <label class="field__row">
+        <span class="field__label" id="shippingDetailLabel">收件地址</span>
+        <input type="text" class="field__input" id="shippingDetail" autocomplete="off">
+      </label>
+      <p class="field__hint field__hint--note" id="shippingFeeNote"></p>
+    </div>
+
+    <div class="field field--text" data-field="email" data-required="true">
+      <label class="field__row">
+        <span class="field__label">Email Address</span>
+        <input type="email" class="field__input" id="email" autocomplete="email">
+      </label>
+    </div>
+
+    <div class="field field--terms" data-field="terms" data-required="true">
+      <button type="button" class="field__row" id="openTerms">
+        <span class="field__label">詳閱訂購須知</span>
+        <span class="terms-check">
+          <span class="terms-check__box" id="termsBox"></span>
+          <span class="terms-check__text">我已同意訂購須知規範</span>
+        </span>
+      </button>
+    </div>
+
+    <div class="field field--text" data-field="remark">
+      <label class="field__row">
+        <span class="field__label">備註</span>
+        <input type="text" class="field__input" id="remark" autocomplete="off">
+      </label>
+    </div>
+  </form>
+
+  <div class="cart-summary" id="cartSummary" hidden>
+    <div class="cart-summary__row">
+      <span>商品金額</span>
+      <span id="summaryBooks">$0</span>
+    </div>
+    <div id="summaryShippingList"></div>
+    <div class="cart-summary__row cart-summary__row--total">
+      <span>TOTAL</span>
+      <span id="summaryTotal">$0</span>
+    </div>
+  </div>
+
+  <button type="submit" form="checkoutForm" class="submit-btn" id="checkoutBtn" hidden>送出訂單</button>
+  <p class="cart-error" id="checkoutError" hidden></p>
+</main>
+
+<div class="footer-links" id="footerLinks">
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>ME'SEUM</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="story.html" class="footer-links__sub">關於 meseum</a>
+    </div>
+  </div>
+
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>SUPPORT</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="lookup.html" class="footer-links__sub">訂單查詢</a>
+      <a href="customer-service.html?tab=payment" class="footer-links__sub">付款方式</a>
+      <a href="customer-service.html?tab=terms" class="footer-links__sub">訂購須知</a>
+      <a href="customer-service.html?tab=overseas" class="footer-links__sub">海外服務</a>
+    </div>
+  </div>
+
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>CONTACT</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="https://lin.ee/RDZ6yvA" class="footer-links__sub" target="_blank" rel="noopener">LINE</a>
+      <a href="https://www.instagram.com/meseum.book?igsh=dnBoNGhxOWt0dWF4" class="footer-links__sub" target="_blank" rel="noopener">INSTAGRAM</a>
+      <a href="mailto:meseum.book@gmail.com" class="footer-links__sub">EMAIL</a>
+    </div>
+  </div>
+
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>FAQ</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="customer-service.html" class="footer-links__sub">常見問題</a>
+    </div>
+  </div>
+
+  <p class="footer-links__copyright">&copy; <span id="year"></span> me&rsquo;seum. All rights reserved.</p>
+</div>
+
+<div class="modal" id="termsModal" aria-hidden="true">
+  <div class="modal__overlay" id="termsOverlay"></div>
+  <div class="modal__panel">
+    <div class="modal__header">
+      <span>訂購須知</span>
+      <button type="button" class="modal__close" id="closeTerms" aria-label="關閉">&times;</button>
+    </div>
+    <div class="modal__body" id="modalBody">
+      <p>1. 每本商品皆為獨一無二，會依照片數量、順序需求等不同因素有不同的編排設計，皆會依照meseum品牌風格呈現，請務必接受及認同再下單。</p>
+      <p>2. 除現有標註之可自訂編輯範圍及選項，其餘設計包括字體大小、字型、顏色、頁數等皆屬品牌設計不可調整。</p>
+      <p>3. 訂製書皆以附自然紋理之美術紙印製，印刷後為帶有粗糙粒子的視覺效果呈現，非細緻的清晰高畫質，(照片本身的畫質高低也會加以影響)，可接受再下單。</p>
+      <p>4. 無提供校稿服務，書本完成編排後將直接送印，如有特殊需求及想法等皆需於提交製作時完成溝通及討論。</p>
+      <p>5. 完成提交製作後，不可再更改款式及內容。</p>
+      <p>6. 不接受因個人喜好等非商品瑕疵因素取消訂單或退貨。</p>
+      <p>7. 製作日程約提交製作後12–14週，實際出貨時間將依當期訂單量另行通知，急件請勿下單。</p>
+      <p class="modal__body--emphasis">8. 如有指定收件日期（婚禮、生日、紀念日等所需），請務必提前三個月（12週）下單，且務必於訂單備註中或官方line告知指定收件日期（少於三個月之訂單皆不保證指定收件日）。</p>
+      <p>9. 送出訂單即代表您已詳閱並同意以上須知規範。</p>
+    </div>
+    <label class="modal__agree" id="modalAgreeRow">
+      <input type="checkbox" id="modalAgreeCheckbox">
+      <span class="terms-check__box" id="modalAgreeBox"></span>
+      <span>我已同意訂購須知規範<em>（務必詳閱訂購須知，可接受再下單）</em></span>
+    </label>
+  </div>
+</div>
+
+<script src="products.js?v=9"></script>
+<script src="cart-store.js?v=7"></script>
+<script src="script.js?v=11"></script>
+<script src="cart.js?v=8"></script>
+</body>
+</html>

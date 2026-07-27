@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>訂單確認 — me'seum</title>
+<meta name="description" content="me'seum 訂單確認頁面。">
+<link rel="icon" href="images/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Noto+Serif+TC:wght@200&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="order-detail.css?v=13">
+<link rel="stylesheet" href="cart.css?v=9">
+<link rel="stylesheet" href="order-confirmation.css?v=8">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <a href="index.html" class="logo" aria-label="me'seum">
+    <img src="images/logo.svg" alt="me'seum">
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="開啟選單" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="story.html" class="nav-link">STORY</a></li>
+    <li><a href="collection.html" class="nav-link">COLLECTION</a></li>
+    <li><a href="order.html" class="nav-link">ORDER</a></li>
+    <li><a href="cart.html" class="nav-link">CART<span data-cart-count hidden></span></a></li>
+    <li><a href="lookup.html" class="nav-link">TRACK</a></li>
+  </ul>
+</nav>
+
+<main class="cart-page confirm-page" id="confirmPage">
+  <h1 class="cart-page__title">訂單確認</h1>
+
+  <p class="confirm-loading" id="confirmLoading">查詢訂單資訊中…</p>
+  <p class="cart-error" id="confirmError" hidden></p>
+
+  <div id="confirmContent" hidden>
+
+    <div class="confirm-greeting">
+      <p class="confirm-greeting__hello" id="confirmGreeting"></p>
+      <p class="confirm-greeting__id" id="confirmOrderId"></p>
+    </div>
+
+    <section class="confirm-section">
+      <h2 class="confirm-section__title">訂購明細</h2>
+      <div id="confirmItems"></div>
+    </section>
+
+    <section class="confirm-section">
+      <h2 class="confirm-section__title">收件資訊</h2>
+      <div class="field" id="confirmRecipientInfo"></div>
+    </section>
+
+    <div class="cart-summary" id="confirmSummary">
+      <div class="cart-summary__row">
+        <span>商品金額</span>
+        <span id="confirmBooksTotal">$0</span>
+      </div>
+      <div class="cart-summary__row cart-summary__row--sub">
+        <span>運費</span>
+        <span id="confirmShippingFee">$0</span>
+      </div>
+      <div class="cart-summary__row cart-summary__row--total">
+        <span>TOTAL</span>
+        <span id="confirmGrandTotal">$0</span>
+      </div>
+    </div>
+
+    <section class="confirm-section">
+      <h2 class="confirm-section__title">匯款資訊</h2>
+      <div class="field">
+        <div class="field__row">
+          <span class="field__label">銀行</span>
+          <span class="field__value" id="confirmBankName"></span>
+        </div>
+        <div class="field__row">
+          <span class="field__label">帳號</span>
+          <span class="field__value" id="confirmBankAccount"></span>
+        </div>
+        <div class="field__row">
+          <span class="field__label">匯款期限</span>
+          <span class="field__value" id="confirmDeadline"></span>
+        </div>
+      </div>
+      <p class="confirm-note">再麻煩您於期限前完成匯款喔！</p>
+
+      <p class="confirm-note confirm-note--confirmed" id="paymentConfirmed" hidden>
+        已收到您的付款回報<span id="confirmedLast5Wrap">，帳號後五碼：<span id="confirmedLast5"></span></span>，感謝您！
+      </p>
+      <form class="order-form" id="paymentConfirmForm" novalidate>
+        <div class="field field--text" data-field="remitLast5">
+          <label class="field__row">
+            <span class="field__label">匯款帳號後五碼</span>
+            <input type="text" class="field__input" id="remitLast5Input" inputmode="numeric" maxlength="5" autocomplete="off">
+          </label>
+        </div>
+        <button type="submit" class="submit-btn" id="paymentConfirmBtn">我已完成付款</button>
+        <p class="cart-error" id="paymentConfirmError" hidden></p>
+      </form>
+
+      <div class="production-block" id="confirmOverseasPayment" hidden>
+        <p class="production-block__note">海外客戶提供信用卡付款，可使用以下專屬付款連結：</p>
+        <div id="confirmOverseasPaymentLink"></div>
+      </div>
+    </section>
+
+    <section class="confirm-section">
+      <h2 class="confirm-section__title">注意事項</h2>
+      <p class="confirm-note">製作表單完成確立後，即不可再更改款式及內容</p>
+    </section>
+
+    <section class="confirm-section">
+      <h2 class="confirm-section__title">製作表單與專屬相簿</h2>
+      <div id="confirmProduction"></div>
+    </section>
+
+    <section class="confirm-section">
+      <h2 class="confirm-section__title">其他需求說明</h2>
+      <div class="production-block">
+        <p class="production-block__note">如有添加內容段落文字等其他特別需求，請私訊官方 LINE 帳號提供文字內容及詳細說明</p>
+        <p class="production-block__note production-block__note--emphasis">提醒您：建議加入官方 LINE，並於提交製作表單後告知我們一聲，若製作過程中有任何問題，我們也方便即時與您聯繫詢問或說明。</p>
+        <a class="production-block__link" href="https://lin.ee/RDZ6yvA" target="_blank" rel="noopener">官方 LINE 與我們聯繫 →</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<div class="footer-links" id="footerLinks">
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>ME'SEUM</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="story.html" class="footer-links__sub">關於 meseum</a>
+    </div>
+  </div>
+
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>SUPPORT</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="lookup.html" class="footer-links__sub">訂單查詢</a>
+      <a href="customer-service.html?tab=payment" class="footer-links__sub">付款方式</a>
+      <a href="customer-service.html?tab=terms" class="footer-links__sub">訂購須知</a>
+      <a href="customer-service.html?tab=overseas" class="footer-links__sub">海外服務</a>
+    </div>
+  </div>
+
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>CONTACT</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="https://lin.ee/RDZ6yvA" class="footer-links__sub" target="_blank" rel="noopener">LINE</a>
+      <a href="https://www.instagram.com/meseum.book?igsh=dnBoNGhxOWt0dWF4" class="footer-links__sub" target="_blank" rel="noopener">INSTAGRAM</a>
+      <a href="mailto:meseum.book@gmail.com" class="footer-links__sub">EMAIL</a>
+    </div>
+  </div>
+
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>FAQ</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="customer-service.html" class="footer-links__sub">常見問題</a>
+    </div>
+  </div>
+
+  <p class="footer-links__copyright">&copy; <span id="year"></span> me&rsquo;seum. All rights reserved.</p>
+</div>
+
+<script src="products.js?v=9"></script>
+<script src="cart-store.js?v=7"></script>
+<script src="script.js?v=11"></script>
+<script src="order-confirmation.js?v=6"></script>
+</body>
+</html>

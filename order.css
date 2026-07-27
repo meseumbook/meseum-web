@@ -1,0 +1,100 @@
+/* ---------- Order list page ---------- */
+.order-list {
+  padding-top: 131px;
+  border-top: 1px solid #999;
+}
+
+.product-row {
+  display: flex;
+  gap: 17px;
+  padding: 13px 26px;
+  border-bottom: 1px solid #999;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-row__media {
+  position: relative;
+  flex: 0 0 138px;
+  width: 138px;
+  aspect-ratio: 138 / 185;
+  overflow: hidden;
+  background: #f2f2f0;
+}
+
+.product-row__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.product-row__media img.is-active {
+  opacity: 1;
+}
+
+.product-row__info {
+  flex: 1;
+  min-width: 0;
+  padding-top: 7px;
+}
+
+.product-row__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.product-row__name,
+.product-row__price {
+  font-family: 'Forum', 'Songti TC', 'Noto Serif TC', serif;
+  font-size: 16px;
+  letter-spacing: 0.025em;
+}
+
+.product-row__features {
+  margin-top: 40px;
+}
+
+.product-row__features p,
+.spec-row {
+  font-family: 'Forum', 'Songti TC', 'Noto Serif TC', serif;
+  font-size: 12px;
+  letter-spacing: 0.025em;
+  line-height: 14px;
+}
+
+.product-row__specs {
+  margin-top: 14px;
+}
+
+.spec-row {
+  display: flex;
+  padding: 3px 0;
+}
+
+.spec-label {
+  flex: 0 0 76px;
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 700px) {
+  .product-row {
+    padding: 20px 48px;
+    gap: 28px;
+  }
+
+  .product-row__media {
+    flex-basis: 200px;
+    width: 200px;
+  }
+
+  .product-row__name,
+  .product-row__price {
+    font-size: 19px;
+  }
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>STORY — me'seum</title>
+<meta name="description" content="me'seum，將每一段回憶收藏成冊。專屬於你的紀念相冊品牌故事。">
+<link rel="icon" href="images/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Noto+Serif+TC:wght@200&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="page.css?v=18">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <a href="index.html" class="logo" aria-label="me'seum">
+    <img src="images/logo.svg" alt="me'seum">
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="開啟選單" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="story.html" class="nav-link">STORY</a></li>
+    <li><a href="collection.html" class="nav-link">COLLECTION</a></li>
+    <li><a href="order.html" class="nav-link">ORDER</a></li>
+    <li><a href="cart.html" class="nav-link">CART<span data-cart-count hidden></span></a></li>
+    <li><a href="lookup.html" class="nav-link">TRACK</a></li>
+  </ul>
+</nav>
+
+<main class="story-page">
+  <div class="story-text">
+    <p><span class="story-text__en">me'seum</span>為精裝訂製書品牌，以簡約質感設計、手感美術紙製作出保有書籍翻閱溫度的獨一無二珍藏書。</p>
+
+    <p>我們希望生活中任何想紀錄的不論大事小事，都能像書籍一樣收藏在其中，每一刻都能一再被翻閱復活，並且在保有品牌設計的同時也能有自我獨一無二的風格。</p>
+
+    <p class="story-text__quote">keep this love in a photograph<br>
+    Made these memories for ourselves<br>
+    Times are forever frozen still</p>
+
+    <p>平凡的日常碎片、旅行的美好記憶、孩子的成長片刻、親情的溫暖、友情的真摯、愛的甜與蜜.....將這些美好凍結在時間裡</p>
+
+    <p>翻轉書頁，每一刻都一再地復活</p>
+
+    <p>一本只屬於你的珍藏書，一份獨一無二的禮物</p>
+  </div>
+
+  <figure class="story-photo">
+    <img src="e_story/e_1.jpg" alt="me'seum 珍藏書實品照" loading="lazy">
+  </figure>
+</main>
+
+<div class="footer-links" id="footerLinks">
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>ME'SEUM</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="story.html" class="footer-links__sub">關於 meseum</a>
+    </div>
+  </div>
+
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>SUPPORT</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="lookup.html" class="footer-links__sub">訂單查詢</a>
+      <a href="customer-service.html?tab=payment" class="footer-links__sub">付款方式</a>
+      <a href="customer-service.html?tab=terms" class="footer-links__sub">訂購須知</a>
+      <a href="customer-service.html?tab=overseas" class="footer-links__sub">海外服務</a>
+    </div>
+  </div>
+
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>CONTACT</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="https://lin.ee/RDZ6yvA" class="footer-links__sub" target="_blank" rel="noopener">LINE</a>
+      <a href="https://www.instagram.com/meseum.book?igsh=dnBoNGhxOWt0dWF4" class="footer-links__sub" target="_blank" rel="noopener">INSTAGRAM</a>
+      <a href="mailto:meseum.book@gmail.com" class="footer-links__sub">EMAIL</a>
+    </div>
+  </div>
+
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>FAQ</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="customer-service.html" class="footer-links__sub">常見問題</a>
+    </div>
+  </div>
+
+  <p class="footer-links__copyright">&copy; <span id="year"></span> me&rsquo;seum. All rights reserved.</p>
+</div>
+
+<script src="cart-store.js?v=7"></script>
+<script src="script.js?v=11"></script>
+</body>
+</html>

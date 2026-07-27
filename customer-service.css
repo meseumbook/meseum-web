@@ -1,0 +1,77 @@
+.cs-page {
+  padding-top: 131px;
+  padding-bottom: 80px;
+}
+
+/* ---------- Category tabs ---------- */
+.cs-tabs {
+  display: flex;
+  gap: 28px;
+  padding: 32px 26px 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid #999;
+}
+
+.cs-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.cs-tabs__item {
+  flex: none;
+  background: none;
+  border: none;
+  padding: 0 0 4px;
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 200;
+  font-size: 13px;
+  letter-spacing: 0.025em;
+  color: #999;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+}
+
+.cs-tabs__item.is-active {
+  color: #1a1a1a;
+  font-weight: 500;
+  border-bottom-color: #1a1a1a;
+}
+
+/* ---------- Panels ---------- */
+.cs-panel {
+  display: none;
+}
+
+.cs-panel.is-active {
+  display: block;
+}
+
+/* ---------- Content (shown directly under the active tab, no accordion) ---------- */
+.cs-content {
+  padding: 32px 26px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cs-content p {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 200;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.025em;
+  color: #333;
+}
+
+.cs-content p.cs-emphasis {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+@media (min-width: 700px) {
+  .cs-tabs,
+  .cs-content {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}

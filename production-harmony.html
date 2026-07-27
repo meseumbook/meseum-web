@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Harmony 製作表單 — me'seum</title>
+<meta name="description" content="me'seum Harmony 款製作表單。">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="images/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Noto+Serif+TC:wght@200&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="order-detail.css?v=13">
+<link rel="stylesheet" href="production.css?v=14">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <a href="index.html" class="logo" aria-label="me'seum">
+    <img src="images/logo.svg" alt="me'seum">
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="開啟選單" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="story.html" class="nav-link">STORY</a></li>
+    <li><a href="collection.html" class="nav-link">COLLECTION</a></li>
+    <li><a href="order.html" class="nav-link">ORDER</a></li>
+    <li><a href="cart.html" class="nav-link">CART<span data-cart-count hidden></span></a></li>
+    <li><a href="lookup.html" class="nav-link">TRACK</a></li>
+  </ul>
+</nav>
+
+<main class="production">
+
+  <section class="production-hero">
+    <div class="production-hero__media">
+      <img src="images/production/hero-harmony.jpg?v=2" alt="Harmony">
+    </div>
+    <nav class="style-tabs">
+      <span class="style-tabs__item">Ethereal</span>
+      <span class="style-tabs__item">Moment</span>
+      <span class="style-tabs__item is-active">Harmony</span>
+      <span class="style-tabs__item">Serenity</span>
+    </nav>
+  </section>
+
+  <form class="production-form" id="productionForm" novalidate>
+
+    <div class="field field--accordion" data-field="coverColor" data-required="true">
+      <button type="button" class="field__row">
+        <span class="field__label">書籍封面顏色</span>
+        <span class="field__value" data-empty="+"></span>
+      </button>
+      <div class="field__options">
+        <button type="button" class="option" data-value="白色">白色</button>
+        <button type="button" class="option" data-value="米色">米色</button>
+      </div>
+    </div>
+
+    <div class="field field--accordion" data-field="pages" data-required="true">
+      <button type="button" class="field__row">
+        <span class="field__label">頁數</span>
+        <span class="field__value" data-empty="+"></span>
+      </button>
+      <div class="field__options">
+        <button type="button" class="option" data-value="80頁">80頁</button>
+        <button type="button" class="option" data-value="120頁">120頁</button>
+      </div>
+    </div>
+
+    <div class="field field--upload">
+      <div class="field__row">
+        <span class="field__label">封面照片 <em>*照片會依圖框大小進行裁切</em></span>
+        <button type="button" class="upload-btn" id="coverStickerUpload">UPLOAD</button>
+        <input type="file" id="coverStickerInput" accept="image/*" multiple hidden>
+      </div>
+      <p class="upload-status" id="coverStickerStatus"></p>
+    </div>
+
+    <div class="field field--reveal" data-field="title">
+      <label class="field__row">
+        <span class="field__label">書籍名稱/標題</span>
+        <input type="text" class="field__input" id="titleInput" autocomplete="off">
+      </label>
+      <div class="field__example">
+        <div class="field__example-media">
+          <img src="images/production/title-example.jpg" alt="書籍名稱/標題範例">
+        </div>
+        <p class="field__example-caption">顯示於內頁第一頁</p>
+      </div>
+    </div>
+
+    <div class="field field--reveal" data-field="subtitle">
+      <label class="field__row">
+        <span class="field__label">副標題</span>
+        <input type="text" class="field__input" id="subtitleInput" autocomplete="off">
+      </label>
+      <div class="field__example">
+        <div class="field__example-media field__example-media--wide">
+          <img src="images/production/subtitle-example.jpg?v=3" alt="副標題範例">
+        </div>
+        <p class="field__example-caption">如無需文字請填「無」</p>
+      </div>
+    </div>
+
+    <div class="field field--reveal" data-field="bottomText">
+      <label class="field__row">
+        <span class="field__label">標題頁下方文字</span>
+        <input type="text" class="field__input" id="bottomTextInput" autocomplete="off">
+      </label>
+      <div class="field__example">
+        <div class="field__example-media field__example-media--wide">
+          <img src="images/production/bottomtext-example.jpg?v=3" alt="標題頁下方文字範例">
+        </div>
+        <p class="field__example-caption">如無需文字請填「無」</p>
+      </div>
+    </div>
+
+    <div class="field field--reveal" data-field="page3">
+      <label class="field__row">
+        <span class="field__label">第三頁文字文案</span>
+        <input type="text" class="field__input" id="page3Input" autocomplete="off">
+      </label>
+      <div class="field__example">
+        <div class="field__example-media field__example-media--wide">
+          <img src="images/production/page3-example.jpg?v=3" alt="第三頁文字文案範例">
+        </div>
+        <p class="field__example-caption">如無需文字請填「無」</p>
+      </div>
+    </div>
+
+    <div class="field field--accordion" data-field="extraContent" data-required="true">
+      <button type="button" class="field__row">
+        <span class="field__label">添加內容段落文字等其他特別需求</span>
+        <span class="field__value" data-empty="+"></span>
+      </button>
+      <div class="field__options">
+        <div class="field__example">
+          <div class="field__example-media field__example-media--wide">
+            <img src="images/production/extra-example.jpg?v=3" alt="添加內容段落文字範例">
+          </div>
+        </div>
+        <button type="button" class="option" data-value="無">無</button>
+        <button type="button" class="option" data-value="有">有</button>
+      </div>
+      <p class="field__hint" id="extraContentHint"></p>
+    </div>
+
+    <div class="field field--accordion" data-field="photoOrder" data-required="true">
+      <button type="button" class="field__row">
+        <span class="field__label">指定照片順序</span>
+        <span class="field__value" data-empty="+"></span>
+      </button>
+      <div class="field__options">
+        <button type="button" class="option" data-value="無此需求">無此需求</button>
+        <button type="button" class="option" data-value="指定順序">指定順序</button>
+      </div>
+      <p class="field__hint" id="photoOrderHint"></p>
+    </div>
+
+    <div class="field field--accordion" data-field="photoNote" data-required="true">
+      <button type="button" class="field__row">
+        <span class="field__label">照片備註文字需求</span>
+        <span class="field__value" data-empty="+"></span>
+      </button>
+      <div class="field__options">
+        <button type="button" class="option" data-value="無此需求">無此需求</button>
+        <button type="button" class="option" data-value="有備註文字">有備註文字</button>
+      </div>
+      <p class="field__hint" id="photoNoteHint"></p>
+    </div>
+
+    <div class="field field--terms" data-field="photoUploaded" data-required="true">
+      <button type="button" class="field__row" id="openPhotoUploadInfo">
+        <span class="field__label">照片已上傳至專屬連結 <em>*務必完成再勾選</em></span>
+        <span class="terms-check" id="photoUploadedCheck">
+          <span class="terms-check__box"></span>
+          <span class="terms-check__text">已完成照片上傳</span>
+        </span>
+      </button>
+      <p class="field__hint field__hint--info" id="photoUploadInfoHint">照片檔案大小需至少1mb以上（小於1mb之照片會盡量協助縮小放置，但仍會有照片較模糊的情形喲！）</p>
+    </div>
+
+    <div class="field field--text" data-field="remit" data-required="true">
+      <label class="field__row">
+        <span class="field__label">匯款帳號後五碼 <em>*務必完成匯款再填寫</em></span>
+        <input type="text" class="field__input" id="remitInput" inputmode="numeric" autocomplete="off">
+      </label>
+    </div>
+
+    <div class="field field--text" data-field="lineName" data-required="true">
+      <label class="field__row">
+        <span class="field__label">Line名稱 <em>聊天室名稱，非帳號ID</em></span>
+        <input type="text" class="field__input" id="lineNameInput" autocomplete="off">
+      </label>
+    </div>
+
+    <div class="field field--text" data-field="email" data-required="true">
+      <label class="field__row">
+        <span class="field__label">Email Address</span>
+        <input type="email" class="field__input" id="emailInput" autocomplete="email">
+      </label>
+    </div>
+
+  </form>
+
+  <p class="production-note">*如有指定收件日期或其他特別需求請務必加入官方Line詳細說明</p>
+
+  <button type="submit" form="productionForm" class="submit-btn" id="submitProductionBtn">提交製作</button>
+
+</main>
+
+<script src="cart-store.js?v=7"></script>
+<script src="script.js?v=11"></script>
+<script src="production-harmony.js?v=3"></script>
+</body>
+</html>

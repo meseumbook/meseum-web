@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>訂購 — me'seum</title>
+<meta name="description" content="me'seum 相冊訂購單。">
+<link rel="icon" href="images/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Noto+Serif+TC:wght@200&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="order-detail.css?v=13">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <a href="index.html" class="logo" aria-label="me'seum">
+    <img src="images/logo.svg" alt="me'seum">
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="開啟選單" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="story.html" class="nav-link">STORY</a></li>
+    <li><a href="collection.html" class="nav-link">COLLECTION</a></li>
+    <li><a href="order.html" class="nav-link">ORDER</a></li>
+    <li><a href="cart.html" class="nav-link">CART<span data-cart-count hidden></span></a></li>
+    <li><a href="lookup.html" class="nav-link">TRACK</a></li>
+  </ul>
+</nav>
+
+<main class="order-detail" id="orderDetail">
+
+  <section class="product-info" id="productInfo"></section>
+
+  <form class="order-form" id="orderForm" novalidate>
+    <div class="field field--accordion" data-field="pages" data-required="true">
+      <button type="button" class="field__row">
+        <span class="field__label">頁數</span>
+        <span class="field__value" data-empty="+"></span>
+      </button>
+      <div class="field__options" id="pageOptions">
+        <!-- injected by JS from product.pageOptions -->
+      </div>
+    </div>
+
+    <div class="field field--accordion" data-field="quantity" data-required="true">
+      <button type="button" class="field__row">
+        <span class="field__label">訂購數量</span>
+        <span class="field__value" data-empty="+"></span>
+      </button>
+      <div class="field__options" id="quantityOptions">
+        <!-- 1-9 injected by JS, plus 10以上 -->
+      </div>
+      <p class="field__hint field__hint--note field__hint--persist" id="quantityDiscountNote" hidden>此為同一份內容的加印本數，第2本起85折</p>
+    </div>
+
+    <div class="field field--accordion" data-field="addon" data-required="true">
+      <button type="button" class="field__row">
+        <span class="field__label">加值服務</span>
+        <span class="field__value" data-empty="+"></span>
+      </button>
+      <div class="field__options">
+        <button type="button" class="option" data-value="照片調色 $800" data-price="800">照片調色 $800</button>
+        <button type="button" class="option" data-value="無" data-price="0">無</button>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="order-total">
+    <div class="order-total__row order-total__row--amount-only">
+      <span id="totalAmount">NT$0</span>
+    </div>
+  </div>
+
+  <button type="submit" form="orderForm" class="submit-btn" id="submitBtn">加入購物車</button>
+  <p class="cart-feedback" id="cartFeedback" hidden>已加入購物車 — <a href="cart.html">前往購物車查看並送出訂單</a></p>
+</main>
+
+<div class="footer-links" id="footerLinks">
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>ME'SEUM</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="story.html" class="footer-links__sub">關於 meseum</a>
+    </div>
+  </div>
+
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>SUPPORT</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="lookup.html" class="footer-links__sub">訂單查詢</a>
+      <a href="customer-service.html?tab=payment" class="footer-links__sub">付款方式</a>
+      <a href="customer-service.html?tab=terms" class="footer-links__sub">訂購須知</a>
+      <a href="customer-service.html?tab=overseas" class="footer-links__sub">海外服務</a>
+    </div>
+  </div>
+
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>CONTACT</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="https://lin.ee/RDZ6yvA" class="footer-links__sub" target="_blank" rel="noopener">LINE</a>
+      <a href="https://www.instagram.com/meseum.book?igsh=dnBoNGhxOWt0dWF4" class="footer-links__sub" target="_blank" rel="noopener">INSTAGRAM</a>
+      <a href="mailto:meseum.book@gmail.com" class="footer-links__sub">EMAIL</a>
+    </div>
+  </div>
+
+  <div class="footer-links__item" data-accordion>
+    <button type="button" class="footer-links__row">
+      <span>FAQ</span>
+      <span class="footer-links__icon"><span></span><span></span></span>
+    </button>
+    <div class="footer-links__panel">
+      <a href="customer-service.html" class="footer-links__sub">常見問題</a>
+    </div>
+  </div>
+
+  <p class="footer-links__copyright">&copy; <span id="year"></span> me&rsquo;seum. All rights reserved.</p>
+</div>
+
+<script src="products.js?v=9"></script>
+<script src="cart-store.js?v=7"></script>
+<script src="script.js?v=11"></script>
+<script src="order-detail.js?v=10"></script>
+</body>
+</html>

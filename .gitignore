@@ -1,0 +1,13 @@
+.DS_Store
+.claude/
+
+# Design reference / source material — not used by the live site
+# (live assets already live under images/, e_story/, fonts/)
+a首頁/
+b_order/
+c_製作表單/
+d_collection/
+
+# Google Apps Script backend source — deployed separately via Google,
+# not part of the static site that gets served to visitors
+apps-script/
