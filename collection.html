@@ -9,8 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Forum&family=Noto+Serif+TC:wght@200&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=9">
-<link rel="stylesheet" href="collection.css?v=24">
+<link rel="stylesheet" href="style.css?v=13">
+<link rel="stylesheet" href="collection.css?v=35">
 </head>
 <body>
 
@@ -26,11 +26,10 @@
 
 <nav class="mobile-nav" id="mobileNav">
   <ul>
-    <li><a href="story.html" class="nav-link">STORY</a></li>
-    <li><a href="collection.html" class="nav-link">COLLECTION</a></li>
-    <li><a href="order.html" class="nav-link">ORDER</a></li>
-    <li><a href="cart.html" class="nav-link">CART<span data-cart-count hidden></span></a></li>
-    <li><a href="lookup.html" class="nav-link">TRACK</a></li>
+    <li><a href="collection.html" class="nav-link">Collection</a></li>
+    <li><a href="order.html" class="nav-link">Order</a></li>
+    <li><a href="cart.html" class="nav-link">Cart<span data-cart-count hidden></span></a></li>
+    <li><a href="lookup.html" class="nav-link">Track</a></li>
   </ul>
 </nav>
 
@@ -40,9 +39,15 @@
     <img src="images/collection/1.jpg" alt="me'seum 書籍細節" loading="lazy">
   </section>
 
-  <div class="swap-group">
-    <img class="swap-group__img" src="images/collection/2-1.jpg" alt="me'seum 書籍細節樣式一">
-    <img class="swap-group__img" src="images/collection/2-2.jpg" alt="me'seum 書籍細節樣式二">
+  <div class="photo-carousel">
+    <div class="photo-carousel__track">
+      <img class="photo-carousel__img" src="images/collection/2-1.jpg" alt="me'seum 書籍細節樣式一">
+      <img class="photo-carousel__img" src="images/collection/2-2.jpg" alt="me'seum 書籍細節樣式二">
+    </div>
+    <div class="photo-carousel__dots">
+      <span class="photo-carousel__dot is-active"></span>
+      <span class="photo-carousel__dot"></span>
+    </div>
   </div>
 
   <section class="collection-text">
@@ -58,18 +63,36 @@
     <p class="collection-text__body">書本尺寸15.3x21.6公分（約A5大小），<br>以加厚的3mm紙板裱美術紙，加深書本的厚實份量</p>
   </section>
 
-  <section class="collection-photos">
-    <img src="images/collection/4-1.jpg" alt="me'seum 美術紙質感樣式一" loading="lazy">
-  </section>
+  <div class="photo-carousel">
+    <div class="photo-carousel__track">
+      <img class="photo-carousel__img" src="images/collection/4-1.jpg" alt="me'seum 美術紙質感樣式一">
+      <img class="photo-carousel__img" src="images/collection/4-2.jpg" alt="me'seum 美術紙質感樣式二">
+      <img class="photo-carousel__img" src="images/collection/4-3.jpg" alt="me'seum 美術紙質感樣式三">
+    </div>
+    <div class="photo-carousel__dots">
+      <span class="photo-carousel__dot is-active"></span>
+      <span class="photo-carousel__dot"></span>
+      <span class="photo-carousel__dot"></span>
+    </div>
+  </div>
 
   <section class="collection-text">
     <p class="collection-text__title">賦有溫度手感的美術紙製作</p>
     <p class="collection-text__body">書籍封面及扉頁以細緻溫潤的德國馬諦斯紙、自然紋理的日本丹迪紙製作<br>內頁以擁有纖維紋理的沐光紙呈現細緻的書籍翻閱手感</p>
   </section>
 
-  <section class="collection-photos">
-    <img src="images/collection/5-1.jpg" alt="me'seum 訂製封面樣式一" loading="lazy">
-  </section>
+  <div class="photo-carousel">
+    <div class="photo-carousel__track">
+      <img class="photo-carousel__img" src="images/collection/5-1.jpg" alt="me'seum 訂製封面樣式一">
+      <img class="photo-carousel__img" src="images/collection/5-2.jpg" alt="me'seum 訂製封面樣式二">
+      <img class="photo-carousel__img" src="images/collection/5-3.jpg" alt="me'seum 訂製封面樣式三">
+    </div>
+    <div class="photo-carousel__dots">
+      <span class="photo-carousel__dot is-active"></span>
+      <span class="photo-carousel__dot"></span>
+      <span class="photo-carousel__dot"></span>
+    </div>
+  </div>
 
   <section class="collection-photos">
     <img src="images/collection/6.jpg" alt="me'seum 書籍內頁編排" loading="lazy">
@@ -85,9 +108,18 @@
     </div>
   </section>
 
-  <section class="collection-photos">
-    <img src="images/collection/7-1.jpg" alt="me'seum 訂製書樣式一" loading="lazy">
-  </section>
+  <div class="photo-carousel">
+    <div class="photo-carousel__track">
+      <img class="photo-carousel__img" src="images/collection/7-1.jpg" alt="me'seum 訂製書樣式一">
+      <img class="photo-carousel__img" src="images/collection/7-2.jpg" alt="me'seum 訂製書樣式二">
+      <img class="photo-carousel__img" src="images/collection/7-3.jpg" alt="me'seum 訂製書樣式三">
+    </div>
+    <div class="photo-carousel__dots">
+      <span class="photo-carousel__dot is-active"></span>
+      <span class="photo-carousel__dot"></span>
+      <span class="photo-carousel__dot"></span>
+    </div>
+  </div>
 
   <section class="collection-text">
     <p class="collection-text__title">手感厚度頁數</p>
@@ -98,17 +130,33 @@
     </div>
   </section>
 
-  <section class="collection-photos">
-    <img src="images/collection/8-1.jpg" alt="me'seum 訂製書陳列樣式一" loading="lazy">
-  </section>
+  <div class="photo-carousel">
+    <div class="photo-carousel__track">
+      <img class="photo-carousel__img" src="images/collection/8-1.jpg" alt="me'seum 訂製書陳列樣式一">
+      <img class="photo-carousel__img" src="images/collection/8-2.jpg" alt="me'seum 訂製書陳列樣式二">
+    </div>
+    <div class="photo-carousel__dots">
+      <span class="photo-carousel__dot is-active"></span>
+      <span class="photo-carousel__dot"></span>
+    </div>
+  </div>
 
   <section class="collection-text">
     <p class="collection-text__body">精緻品牌包裝盒，一份獨一無二的禮物</p>
   </section>
 
-  <section class="collection-photos">
-    <img src="images/collection/9-1.jpg" alt="me'seum 品牌包裝盒樣式一" loading="lazy">
-  </section>
+  <div class="photo-carousel">
+    <div class="photo-carousel__track">
+      <img class="photo-carousel__img" src="images/collection/9-1.jpg" alt="me'seum 品牌包裝盒樣式一">
+      <img class="photo-carousel__img" src="images/collection/9-2.jpg" alt="me'seum 品牌包裝盒樣式二">
+      <img class="photo-carousel__img" src="images/collection/9-3.jpg" alt="me'seum 品牌包裝盒樣式三">
+    </div>
+    <div class="photo-carousel__dots">
+      <span class="photo-carousel__dot is-active"></span>
+      <span class="photo-carousel__dot"></span>
+      <span class="photo-carousel__dot"></span>
+    </div>
+  </div>
 
   <section class="collection-heading">
     <p>Collection</p>
@@ -227,9 +275,9 @@
       <span class="footer-links__icon"><span></span><span></span></span>
     </button>
     <div class="footer-links__panel">
-      <a href="https://lin.ee/RDZ6yvA" class="footer-links__sub" target="_blank" rel="noopener">LINE</a>
-      <a href="https://www.instagram.com/meseum.book?igsh=dnBoNGhxOWt0dWF4" class="footer-links__sub" target="_blank" rel="noopener">INSTAGRAM</a>
-      <a href="mailto:meseum.book@gmail.com" class="footer-links__sub">EMAIL</a>
+      <a href="https://lin.ee/RDZ6yvA" class="footer-links__sub" target="_blank" rel="noopener">Line</a>
+      <a href="https://www.instagram.com/meseum.book?igsh=dnBoNGhxOWt0dWF4" class="footer-links__sub" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:meseum.book@gmail.com" class="footer-links__sub">Email</a>
     </div>
   </div>
 
@@ -247,7 +295,7 @@
 </div>
 
 <script src="cart-store.js?v=7"></script>
-<script src="script.js?v=11"></script>
-<script src="collection.js?v=20"></script>
+<script src="script.js?v=12"></script>
+<script src="collection.js?v=30"></script>
 </body>
 </html>

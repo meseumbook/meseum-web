@@ -73,6 +73,14 @@
   gap: 10px;
 }
 
+/* .production-block's own `display: flex` is an author rule, which beats the
+   browser's default `[hidden] { display: none }` UA rule even when JS sets
+   the hidden attribute — without this override, a hidden .production-block
+   (e.g. #confirmOverseasPayment for non-overseas orders) stays visible. */
+.production-block[hidden] {
+  display: none;
+}
+
 .production-block__heading {
   font-family: 'Forum', 'Songti TC', 'Noto Serif TC', serif;
   font-size: 14px;

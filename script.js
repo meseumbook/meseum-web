@@ -17,7 +17,7 @@ mobileNav.querySelectorAll('a').forEach((link) => {
 });
 
 // Scroll reveal
-const revealEls = document.querySelectorAll('.hero__poem, .quote p, .quote__links, .photo-banner');
+const revealEls = document.querySelectorAll('.hero__poem, .quote p, .quote__links, .photo-banner, .collection-text, .collection-photos, .photo-carousel, .cs-style');
 revealEls.forEach((el) => el.classList.add('reveal'));
 
 const observer = new IntersectionObserver(

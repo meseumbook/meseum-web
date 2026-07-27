@@ -141,9 +141,9 @@ ul {
   background: #fff;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 56px;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 150px 26px 0;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px);
@@ -159,12 +159,16 @@ ul {
 .mobile-nav ul {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 32px;
+  align-items: flex-end;
+  gap: 10px;
 }
 
 .mobile-nav .nav-link {
-  font-size: 15px;
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: #333;
   text-decoration: none;
 }
 
@@ -278,28 +282,28 @@ ul {
 
 .footer-links__icon {
   position: relative;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   flex: none;
 }
 
 .footer-links__icon span {
   position: absolute;
-  background: #333333;
+  background: #666666;
 }
 
 .footer-links__icon span:nth-child(1) {
   top: 50%;
   left: 0;
   width: 100%;
-  height: 1px;
+  height: 0.6px;
   transform: translateY(-50%);
 }
 
 .footer-links__icon span:nth-child(2) {
   left: 50%;
   top: 0;
-  width: 1px;
+  width: 0.6px;
   height: 100%;
   transform: translateX(-50%);
   transition: transform 0.2s ease;
