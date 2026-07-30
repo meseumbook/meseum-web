@@ -85,6 +85,6 @@ const PRODUCT_ORDER = ['ethereal', 'moment', 'harmony', 'serenity'];
    customer confirmation email. */
 const BANK_INFO = {
   bankName: '013國泰世華銀行',
-  bankAccount: '0745-060-92276',
+  bankAccount: '0747-000-35674',
 };
 const PAYMENT_DEADLINE_DAYS = 3;
