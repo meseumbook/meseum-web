@@ -52,6 +52,18 @@ body {
   background: #fff;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Sticky footer: on short pages (e.g. lookup.html with no results yet),
+   main absorbs any leftover viewport height so .footer-links always sits
+   flush against the bottom edge instead of floating mid-page with blank
+   white space below it. Doesn't affect the homepage — .split-hero's own
+   220vh height already exceeds the viewport on its own. */
+main {
+  flex: 1 0 auto;
 }
 
 img {
@@ -172,6 +184,23 @@ ul {
   text-decoration: none;
 }
 
+/* ---------- Desktop nav (shown instead of the hamburger at desktop
+   widths) — hidden on mobile/tablet, where the hamburger + overlay handles
+   navigation instead. ---------- */
+.desktop-nav {
+  display: none;
+}
+
+/* ---------- Split-hero wrapper: on mobile/tablet these are just
+   pass-through containers (`display: contents`) so hero/photo-banner/
+   quote/footer-visual stack normally in source order, completely
+   unaffected. The split-screen pinned crossfade layout only exists at
+   the desktop breakpoint below. ---------- */
+.split-hero,
+.split-hero__pin {
+  display: contents;
+}
+
 /* ---------- Hero / poem ---------- */
 .hero {
   padding: 509px 26px 40px;
@@ -209,7 +238,9 @@ ul {
   overflow: hidden;
 }
 
+.photo-banner picture,
 .photo-banner img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -247,6 +278,12 @@ ul {
   aspect-ratio: 839 / 1130;
   background: #000;
   overflow: hidden;
+}
+
+.footer-visual picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .footer-visual img {
@@ -396,6 +433,155 @@ ul {
   .photo-banner,
   .footer-visual {
     aspect-ratio: 21 / 9;
+  }
+}
+
+/* ---------- Desktop split-hero: left/right full-height columns pinned
+   in place while the page scrolls through them, the hero poem crossfading
+   into the quote (and the sea photo into the product photo) — then the
+   pin releases and the page continues normally into the footer links.
+   Crossfade opacity is driven by collection... no, by script.js reading
+   scroll position (see script.js) and is purely visual — it never blocks
+   or intercepts scrolling, so there's none of the risk that came with
+   trying to do that on the collection page. */
+@media (min-width: 1024px) {
+  /* Transparent only on pages with their own pinned full-height hero
+     visual sitting directly under it (homepage's split-hero, collection's
+     pinned photo groups) — every other page just has plain scrolling
+     content there, which would show through and overlap the logo/nav
+     otherwise. */
+  body.transparent-header .site-header {
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  .desktop-nav {
+    display: block;
+  }
+
+  .desktop-nav ul {
+    display: flex;
+    gap: 40px;
+  }
+
+  .desktop-nav .nav-link {
+    font-family: 'Forum', 'Noto Serif TC', serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: #4d4d4d;
+    text-decoration: none;
+  }
+
+  .desktop-nav .nav-link:hover {
+    color: #999999;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
+    opacity: 1;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .split-hero,
+  .split-hero__pin {
+    display: block;
+  }
+
+  .split-hero {
+    position: relative;
+    height: 220vh;
+  }
+
+  .split-hero__pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100vh;
+    overflow: hidden;
+  }
+
+  /* Both items in a pair share the same grid cell — CSS Grid lets items
+     overlap like this without needing position: absolute (which, paired
+     with display: flex on the item itself, turned out to have a
+     containing-block quirk in testing: the .hero/.quote pair stretched to
+     the full pinned width instead of just their column). Letting grid's
+     own stretch/overlap size them is simpler and doesn't have that bug. */
+  .split-hero .hero,
+  .split-hero .quote {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 0 64px 96px;
+    opacity: 0;
+  }
+
+  .split-hero .photo-banner,
+  .split-hero .footer-visual {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    opacity: 0;
+  }
+
+  .split-hero .photo-banner img,
+  .split-hero .footer-visual img {
+    opacity: 1;
+  }
+
+  .split-hero .hero,
+  .split-hero .photo-banner {
+    opacity: 1;
+  }
+
+  .split-hero .hero__poem {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .split-hero .hero__poem p,
+  .split-hero .quote p {
+    font-size: 13px;
+  }
+
+  .split-hero .hero__links {
+    max-width: none;
+    width: auto;
+    justify-content: flex-start;
+    gap: 40px;
+    margin-top: 40px;
+    padding: 0;
+  }
+
+  .split-hero .quote {
+    background: transparent;
+    color: #1a1a1a;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .split-hero .quote p {
+    text-align: left;
+  }
+
+  .split-hero .quote .nav-link {
+    color: #1a1a1a;
+  }
+
+  .split-hero .quote__links {
+    margin-top: 40px;
+    padding: 0;
   }
 }
 

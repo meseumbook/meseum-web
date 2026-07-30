@@ -7,6 +7,7 @@ a首頁/
 b_order/
 c_製作表單/
 d_collection/
+web_電腦版/
 
 # Google Apps Script backend source — deployed separately via Google,
 # not part of the static site that gets served to visitors

@@ -51,7 +51,8 @@ function saveCheckoutInfo(info) {
 
 /* First copy of a given book is full price; every additional copy of that
    same line item is 85% off. A cart-wide discount code (if valid) applies
-   9折 on top of both tiers. */
+   9折 on top of both tiers. A flat-amount code instead deducts a fixed
+   NT$ amount from the books subtotal once, after the per-book math. */
 function calcBookTotal(price, quantity, discountRate, discountValid) {
   if (!quantity) return 0;
   const unitFirst = discountValid ? Math.round(price * discountRate) : price;
@@ -59,7 +60,7 @@ function calcBookTotal(price, quantity, discountRate, discountValid) {
   return unitFirst + (quantity - 1) * unitRest;
 }
 
-function computeCartTotals(cart, { discountRate = 1, discountCodeValid = false, shippingFee = 0 } = {}) {
+function computeCartTotals(cart, { discountRate = 1, discountCodeValid = false, discountFlatAmount = 0, shippingFee = 0 } = {}) {
   let booksTotal = 0;
   const itemTotals = cart.map((item) => {
     const bookTotal = calcBookTotal(item.price, item.quantity, discountRate, discountCodeValid);
@@ -67,6 +68,8 @@ function computeCartTotals(cart, { discountRate = 1, discountCodeValid = false, 
     booksTotal += subtotal;
     return { id: item.id, bookTotal, subtotal };
   });
+
+  booksTotal = Math.max(0, booksTotal - discountFlatAmount);
 
   return {
     itemTotals,

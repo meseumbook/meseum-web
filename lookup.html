@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Forum&family=Noto+Serif+TC:wght@200&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=13">
+<link rel="stylesheet" href="style.css?v=21">
 <link rel="stylesheet" href="order-detail.css?v=13">
 <link rel="stylesheet" href="cart.css?v=9">
-<link rel="stylesheet" href="lookup.css?v=11">
+<link rel="stylesheet" href="lookup.css?v=15">
 </head>
 <body>
 
@@ -20,6 +20,14 @@
   <a href="/" class="logo" aria-label="me'seum">
     <img src="images/logo.svg" alt="me'seum">
   </a>
+  <nav class="desktop-nav">
+    <ul>
+      <li><a href="collection.html" class="nav-link">Collection</a></li>
+      <li><a href="order.html" class="nav-link">Order</a></li>
+      <li><a href="cart.html" class="nav-link">Cart<span data-cart-count hidden></span></a></li>
+      <li><a href="lookup.html" class="nav-link">Track</a></li>
+    </ul>
+  </nav>
   <button class="menu-toggle" id="menuToggle" aria-label="開啟選單" aria-expanded="false">
     <span></span>
     <span></span>
@@ -38,33 +46,35 @@
 <main class="cart-page lookup-page" id="lookupPage">
   <h1 class="cart-page__title">查詢訂單</h1>
 
-  <form class="lookup-form" id="lookupForm">
-    <div class="field field--text">
-      <label class="field__row">
-        <span class="field__label">Email</span>
-        <input type="email" class="field__input" id="lookupEmail" autocomplete="email" required>
-      </label>
-    </div>
-    <div class="field field--text">
-      <label class="field__row">
-        <span class="field__label">收件人電話</span>
-        <input type="tel" class="field__input" id="lookupPhone" autocomplete="tel" required>
-      </label>
-    </div>
-    <button type="submit" class="submit-btn" id="lookupBtn">查詢</button>
-  </form>
+  <div class="lookup-columns">
+    <form class="lookup-form" id="lookupForm">
+      <div class="field field--text">
+        <label class="field__row">
+          <span class="field__label">Email</span>
+          <input type="email" class="field__input" id="lookupEmail" autocomplete="email" required>
+        </label>
+      </div>
+      <div class="field field--text">
+        <label class="field__row">
+          <span class="field__label">收件人電話</span>
+          <input type="tel" class="field__input" id="lookupPhone" autocomplete="tel" required>
+        </label>
+      </div>
+      <button type="submit" class="submit-btn" id="lookupBtn">查詢</button>
+    </form>
 
-  <p class="lookup-divider">或</p>
+    <p class="lookup-divider">或</p>
 
-  <form class="lookup-form" id="lookupByIdForm">
-    <div class="field field--text">
-      <label class="field__row">
-        <span class="field__label">訂單編號</span>
-        <input type="text" class="field__input" id="lookupOrderId" autocomplete="off" required>
-      </label>
-    </div>
-    <button type="submit" class="submit-btn" id="lookupByIdBtn">查詢</button>
-  </form>
+    <form class="lookup-form" id="lookupByIdForm">
+      <div class="field field--text">
+        <label class="field__row">
+          <span class="field__label">訂單編號</span>
+          <input type="text" class="field__input" id="lookupOrderId" autocomplete="off" required>
+        </label>
+      </div>
+      <button type="submit" class="submit-btn" id="lookupByIdBtn">查詢</button>
+    </form>
+  </div>
 
   <p class="cart-error" id="lookupError" hidden></p>
   <p class="lookup-empty" id="lookupEmpty" hidden>查無符合的訂單，請確認 Email 與收件人電話是否正確。</p>
@@ -122,7 +132,7 @@
 </div>
 
 <script src="cart-store.js?v=7"></script>
-<script src="script.js?v=12"></script>
+<script src="script.js?v=14"></script>
 <script src="lookup.js?v=8"></script>
 </body>
 </html>

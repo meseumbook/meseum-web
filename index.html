@@ -8,15 +8,23 @@
 <link rel="icon" href="images/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=13">
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Noto+Serif+TC:wght@200&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=21">
 </head>
-<body>
+<body class="transparent-header">
 
 <header class="site-header" id="siteHeader">
   <a href="/" class="logo" aria-label="me'seum">
     <img src="images/logo.svg" alt="me'seum">
   </a>
+  <nav class="desktop-nav">
+    <ul>
+      <li><a href="collection.html" class="nav-link">Collection</a></li>
+      <li><a href="order.html" class="nav-link">Order</a></li>
+      <li><a href="cart.html" class="nav-link">Cart<span data-cart-count hidden></span></a></li>
+      <li><a href="lookup.html" class="nav-link">Track</a></li>
+    </ul>
+  </nav>
   <button class="menu-toggle" id="menuToggle" aria-label="開啟選單" aria-expanded="false">
     <span></span>
     <span></span>
@@ -34,47 +42,59 @@
 
 <main id="top">
 
-  <section class="hero" id="story">
-    <div class="hero__poem">
-      <p>Each moment captured in vivid detail,<br>
-      A life well-lived, preserved without fail.</p>
+  <div class="split-hero">
+    <div class="split-hero__pin">
 
-      <p>With each turn of a page, a new chapter unfolds,<br>
-      A journey through time that never grows old.<br>
-      The laughter, the tears, the joy, and the pain,<br>
-      All come alive, again and again.</p>
+      <section class="hero" id="story">
+        <div class="hero__poem">
+          <p>Each moment captured in vivid detail,<br>
+          A life well-lived, preserved without fail.</p>
 
-      <p>As I run my fingers across the worn spine,<br>
-      I am transported back to a time that was mine.<br>
-      A time when life was simpler, and love was pure,<br>
-      And every moment was a gift to be sure.</p>
+          <p>With each turn of a page, a new chapter unfolds,<br>
+          A journey through time that never grows old.<br>
+          The laughter, the tears, the joy, and the pain,<br>
+          All come alive, again and again.</p>
+
+          <p>As I run my fingers across the worn spine,<br>
+          I am transported back to a time that was mine.<br>
+          A time when life was simpler, and love was pure,<br>
+          And every moment was a gift to be sure.</p>
+        </div>
+
+        <ul class="hero__links">
+          <li><a href="story.html" class="nav-link">STORY</a></li>
+          <li><a href="collection.html" class="nav-link">COLLECTION</a></li>
+          <li><a href="order.html" class="nav-link">ORDER</a></li>
+        </ul>
+      </section>
+
+      <section class="photo-banner" id="collection">
+        <picture>
+          <source media="(min-width: 1024px)" srcset="images/hero-sea-desktop.jpg">
+          <img src="images/hero-sea.jpg" alt="me'seum — 平靜海面與天空，象徵時間靜止的回憶片刻" loading="lazy">
+        </picture>
+      </section>
+
+      <section class="quote" id="quote">
+        <p>keep this love in a photograph<br>
+        Made these memories for ourselves<br>
+        Times are forever frozen still</p>
+
+        <ul class="quote__links">
+          <li><a href="https://www.instagram.com/meseum.book?igsh=dnBoNGhxOWt0dWF4" class="nav-link" target="_blank" rel="noopener">INSTAGRAM</a></li>
+          <li><a href="https://lin.ee/RDZ6yvA" class="nav-link" target="_blank" rel="noopener">LINE</a></li>
+        </ul>
+      </section>
+
+      <section class="footer-visual">
+        <picture>
+          <source media="(min-width: 1024px)" srcset="images/footer-product-desktop.jpg">
+          <img src="images/footer-product.jpg" alt="me'seum 紀念相冊實品照" loading="lazy">
+        </picture>
+      </section>
+
     </div>
-
-    <ul class="hero__links">
-      <li><a href="story.html" class="nav-link">STORY</a></li>
-      <li><a href="collection.html" class="nav-link">COLLECTION</a></li>
-      <li><a href="order.html" class="nav-link">ORDER</a></li>
-    </ul>
-  </section>
-
-  <section class="photo-banner" id="collection">
-    <img src="images/hero-sea.jpg" alt="me'seum — 平靜海面與天空，象徵時間靜止的回憶片刻" loading="lazy">
-  </section>
-
-  <section class="quote" id="quote">
-    <p>keep this love in a photograph<br>
-    Made these memories for ourselves<br>
-    Times are forever frozen still</p>
-
-    <ul class="quote__links">
-      <li><a href="https://www.instagram.com/meseum.book?igsh=dnBoNGhxOWt0dWF4" class="nav-link" target="_blank" rel="noopener">INSTAGRAM</a></li>
-      <li><a href="https://lin.ee/RDZ6yvA" class="nav-link" target="_blank" rel="noopener">LINE</a></li>
-    </ul>
-  </section>
-
-  <section class="footer-visual">
-    <img src="images/footer-product.jpg" alt="me'seum 紀念相冊實品照" loading="lazy">
-  </section>
+  </div>
 
 </main>
 
@@ -128,6 +148,6 @@
 </div>
 
 <script src="cart-store.js?v=7"></script>
-<script src="script.js?v=12"></script>
+<script src="script.js?v=14"></script>
 </body>
 </html>

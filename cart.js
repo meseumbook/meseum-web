@@ -1,5 +1,6 @@
 const checkoutState = {
   discountRate: 1,
+  discountFlatAmount: 0,
   discountCodeValid: false,
   shippingType: '',
   shippingLabel: '',
@@ -7,9 +8,8 @@ const checkoutState = {
   termsAgreed: false,
 };
 
-const DISCOUNT_CODES = {
-  'peter.design': 0.9,
-};
+/* Codes themselves live in discount-codes.js (loaded before this file) —
+   edit that file to add, change, or retire a code. */
 
 function renderCart() {
   const cart = getCart();
@@ -97,18 +97,25 @@ function setupDiscountCode() {
   const hint = document.getElementById('discountHint');
   input.addEventListener('input', () => {
     const code = input.value.trim().toLowerCase();
+    const entry = code ? DISCOUNT_CODES[code] : undefined;
+
+    checkoutState.discountRate = 1;
+    checkoutState.discountFlatAmount = 0;
+    checkoutState.discountCodeValid = false;
+
     if (!code) {
-      checkoutState.discountRate = 1;
-      checkoutState.discountCodeValid = false;
       hint.textContent = '';
-    } else if (DISCOUNT_CODES[code] !== undefined) {
-      checkoutState.discountRate = DISCOUNT_CODES[code];
+    } else if (entry && isDiscountCodeActive(entry)) {
       checkoutState.discountCodeValid = true;
-      hint.textContent = `折扣碼已套用（${Math.round(checkoutState.discountRate * 10)}折優惠）`;
+      if (entry.type === 'flat') {
+        checkoutState.discountFlatAmount = entry.amount;
+        hint.textContent = `折扣碼已套用（現折 NT$${entry.amount}）`;
+      } else {
+        checkoutState.discountRate = entry.rate;
+        hint.textContent = `折扣碼已套用（${Math.round(entry.rate * 10)}折優惠）`;
+      }
       hint.style.color = '#3b7a3b';
     } else {
-      checkoutState.discountRate = 1;
-      checkoutState.discountCodeValid = false;
       hint.textContent = '折扣碼無效';
       hint.style.color = '#b23b3b';
     }
