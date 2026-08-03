@@ -69,6 +69,21 @@ function computeCartTotals(cart, { discountRate = 1, discountCodeValid = false, 
     return { id: item.id, bookTotal, subtotal };
   });
 
+  // Spread the flat-amount deduction across item rows (first item first)
+  // instead of only subtracting it from the aggregate — the order sheet
+  // writes one row per item using each item's own bookTotal, so if this
+  // stayed aggregate-only, the sheet would silently show the pre-discount
+  // amount even though the customer was correctly charged the discounted
+  // total on screen.
+  let remaining = Math.min(discountFlatAmount, booksTotal);
+  itemTotals.forEach((t) => {
+    if (remaining <= 0) return;
+    const take = Math.min(remaining, t.bookTotal);
+    t.bookTotal -= take;
+    t.subtotal -= take;
+    remaining -= take;
+  });
+
   booksTotal = Math.max(0, booksTotal - discountFlatAmount);
 
   return {
