@@ -3,7 +3,7 @@
    Left empty until deployed; submit shows a clear "not connected yet" message. */
 const PRODUCTION_API_URL = 'https://script.google.com/macros/s/AKfycbz2jQbNMQdgxpEKDWI1GQFit61Foo7UhFbFy_bBi-jdb9ZmEACb0Is6CXEqewyKMWYJkw/exec';
 const STYLE_NAME = 'Moment';
-const MAX_FILE_MB = 10;
+const MAX_FILE_MB = 1024; // photos upload straight to Drive now, not through this script — this just guards against picking the wrong file by mistake
 const MIN_COVER_FILES = 6;
 const MAX_COVER_FILES = 6;
 
@@ -125,18 +125,30 @@ function setupCoverStickerUpload() {
   });
 }
 
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(',')[1]);
-    // reader.onerror hands the handler a raw ProgressEvent, not an Error —
-    // assigning it straight to reject() left err.message reading as
-    // "undefined" in the alert shown to the customer. Large phone photos
-    // (8-12MB+) can fail to read this way on memory-constrained mobile
-    // browsers, so this needs a real, visible message.
-    reader.onerror = () => reject(new Error(`「${file.name}」讀取失敗，請確認照片可以正常開啟，或改用其他照片再試一次`));
-    reader.readAsDataURL(file);
+/* ---------- Upload straight to Drive ----------
+   The browser never reads the whole file into memory as base64 and never
+   sends it through PRODUCTION_API_URL's own request body — that request-size
+   ceiling (~30-40MB) is what caused the old "undefined" read failures on
+   large phone photos. Instead: ask Apps Script (running as the shop owner,
+   so the customer never has to sign into Google) for a one-time Drive
+   upload URL, then PUT the raw file straight to Google's own servers. */
+async function uploadFileToDrive(file) {
+  const startRes = await fetch(PRODUCTION_API_URL, {
+    method: 'POST',
+    body: JSON.stringify({ action: 'startUpload', fileName: file.name, mimeType: file.type, styleName: STYLE_NAME, origin: location.origin }),
   });
+  const startResult = await startRes.json();
+  if (!startResult.ok) throw new Error(startResult.error || `「${file.name}」建立上傳通道失敗`);
+
+  const putRes = await fetch(startResult.uploadUrl, {
+    method: 'PUT',
+    headers: { 'Content-Type': file.type },
+    body: file,
+  });
+  if (!putRes.ok) throw new Error(`「${file.name}」上傳失敗（${putRes.status}）`);
+  const uploaded = await putRes.json();
+
+  return { name: file.name, driveViewUrl: `https://drive.google.com/file/d/${uploaded.id}/view` };
 }
 
 /* ---------- Submit ---------- */
@@ -181,23 +193,18 @@ function setupSubmit() {
 
     const btn = document.getElementById('submitProductionBtn');
     btn.disabled = true;
-    btn.textContent = '送出中…';
+    btn.textContent = '上傳照片中…';
 
     try {
       const fileInput = document.getElementById('coverStickerInput');
-      // Read one photo at a time rather than all at once (Promise.all) —
-      // holding several full-size photos as base64 strings in memory
-      // simultaneously is what was pushing mobile Safari's FileReader to
-      // fail on large uploads. Sequential reads don't touch photo quality,
-      // just when each read happens.
+      // Upload photos to Drive one at a time (not concurrently) so the
+      // status text and any failure can point at exactly which file.
       const coverStickers = [];
       for (const file of Array.from(fileInput.files)) {
-        coverStickers.push({
-          name: file.name,
-          mimeType: file.type,
-          data: await fileToBase64(file),
-        });
+        coverStickers.push(await uploadFileToDrive(file));
       }
+
+      btn.textContent = '送出中…';
 
       const payload = {
         styleName: STYLE_NAME,
