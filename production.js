@@ -129,7 +129,12 @@ function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = reject;
+    // reader.onerror hands the handler a raw ProgressEvent, not an Error —
+    // assigning it straight to reject() left err.message reading as
+    // "undefined" in the alert shown to the customer. Large phone photos
+    // (8-12MB+) can fail to read this way on memory-constrained mobile
+    // browsers, so this needs a real, visible message.
+    reader.onerror = () => reject(new Error(`「${file.name}」讀取失敗，請確認照片可以正常開啟，或改用其他照片再試一次`));
     reader.readAsDataURL(file);
   });
 }
@@ -180,13 +185,19 @@ function setupSubmit() {
 
     try {
       const fileInput = document.getElementById('coverStickerInput');
-      const coverStickers = await Promise.all(
-        Array.from(fileInput.files).map(async (file) => ({
+      // Read one photo at a time rather than all at once (Promise.all) —
+      // holding several full-size photos as base64 strings in memory
+      // simultaneously is what was pushing mobile Safari's FileReader to
+      // fail on large uploads. Sequential reads don't touch photo quality,
+      // just when each read happens.
+      const coverStickers = [];
+      for (const file of Array.from(fileInput.files)) {
+        coverStickers.push({
           name: file.name,
           mimeType: file.type,
           data: await fileToBase64(file),
-        }))
-      );
+        });
+      }
 
       const payload = {
         styleName: STYLE_NAME,

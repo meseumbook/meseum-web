@@ -3,7 +3,7 @@
    Left empty until deployed; submit shows a clear "not connected yet" message. */
 const PRODUCTION_API_URL = 'https://script.google.com/macros/s/AKfycbw44BGbWIEMU6wN7ALqSF8lvflY-Pk7Q27iC5M-R1CMzrMncb-nvvN_aX3h1QFiTa0/exec';
 const STYLE_NAME = 'Harmony';
-const MAX_FILE_MB = 10;
+const MAX_FILE_MB = 1024; // photos upload straight to Drive now, not through this script — this just guards against picking the wrong file by mistake
 const MIN_COVER_FILES = 1;
 const MAX_COVER_FILES = 1;
 
@@ -119,13 +119,30 @@ function setupCoverStickerUpload() {
   });
 }
 
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
+/* ---------- Upload straight to Drive ----------
+   The browser never reads the whole file into memory as base64 and never
+   sends it through PRODUCTION_API_URL's own request body — that request-size
+   ceiling (~30-40MB) is what caused the old "undefined" read failures on
+   large phone photos. Instead: ask Apps Script (running as the shop owner,
+   so the customer never has to sign into Google) for a one-time Drive
+   upload URL, then PUT the raw file straight to Google's own servers. */
+async function uploadFileToDrive(file) {
+  const startRes = await fetch(PRODUCTION_API_URL, {
+    method: 'POST',
+    body: JSON.stringify({ action: 'startUpload', fileName: file.name, mimeType: file.type, styleName: STYLE_NAME, origin: location.origin }),
   });
+  const startResult = await startRes.json();
+  if (!startResult.ok) throw new Error(startResult.error || `「${file.name}」建立上傳通道失敗`);
+
+  const putRes = await fetch(startResult.uploadUrl, {
+    method: 'PUT',
+    headers: { 'Content-Type': file.type },
+    body: file,
+  });
+  if (!putRes.ok) throw new Error(`「${file.name}」上傳失敗（${putRes.status}）`);
+  const uploaded = await putRes.json();
+
+  return { name: file.name, driveViewUrl: `https://drive.google.com/file/d/${uploaded.id}/view` };
 }
 
 /* ---------- Submit ---------- */
@@ -170,17 +187,18 @@ function setupSubmit() {
 
     const btn = document.getElementById('submitProductionBtn');
     btn.disabled = true;
-    btn.textContent = '送出中…';
+    btn.textContent = '上傳照片中…';
 
     try {
       const fileInput = document.getElementById('coverStickerInput');
-      const coverStickers = await Promise.all(
-        Array.from(fileInput.files).map(async (file) => ({
-          name: file.name,
-          mimeType: file.type,
-          data: await fileToBase64(file),
-        }))
-      );
+      // Upload photos to Drive one at a time (not concurrently) so the
+      // status text and any failure can point at exactly which file.
+      const coverStickers = [];
+      for (const file of Array.from(fileInput.files)) {
+        coverStickers.push(await uploadFileToDrive(file));
+      }
+
+      btn.textContent = '送出中…';
 
       const payload = {
         styleName: STYLE_NAME,
