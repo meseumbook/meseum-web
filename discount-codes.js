@@ -17,6 +17,7 @@ const DISCOUNT_CODES = {
   'peter.design': { type: 'percent', rate: 0.9 },
   'peterchao': { type: 'percent', rate: 0.9 },
   'allkstudio': { type: 'percent', rate: 0.9 },
+  'allenwl': { type: 'percent', rate: 0.9 },
   'bellechao200': { type: 'flat', amount: 200 }, // 單次碼 — 客戶使用後請刪除或註解掉這一行
 };
 
