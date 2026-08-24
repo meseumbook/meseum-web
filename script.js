@@ -42,8 +42,11 @@ const observer = new IntersectionObserver(
 
 revealEls.forEach((el) => observer.observe(el));
 
-// Footer year
-document.getElementById('year').textContent = new Date().getFullYear();
+// Footer year — not every page has a footer-links block (the production
+// forms don't), so guard instead of throwing and halting the rest of this
+// script on those pages.
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // Footer accordion (STORY/SUPPORT/CONTACT/FAQ)
 document.querySelectorAll('.footer-links__item').forEach((item) => {
