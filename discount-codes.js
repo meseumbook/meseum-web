@@ -24,6 +24,7 @@ const DISCOUNT_CODES = {
   '丰feng': { type: 'percent', rate: 0.9 },
   'ourtime': { type: 'percent', rate: 0.9, startDate: '2026-08-25', endDateTime: '2026-09-02T12:59:00' },
   'hanguan': { type: 'percent', rate: 0.9, startDate: '2026-09-09', endDate: '2026-09-17' },
+  'starmijan': { type: 'percent', rate: 0.9, endDate: '2026-09-24' },
   'bellechao200': { type: 'flat', amount: 200 }, // 單次碼 — 客戶使用後請刪除或註解掉這一行
 };
 
