@@ -27,6 +27,7 @@ const DISCOUNT_CODES = {
   'starmijan': { type: 'percent', rate: 0.9, endDate: '2026-09-24' },
   'bellechao200': { type: 'flat', amount: 200 }, // 單次碼 — 客戶使用後請刪除或註解掉這一行
   '冠伃200': { type: 'flat', amount: 200 }, // 單次碼 — 客戶使用後請刪除或註解掉這一行
+  'jinchang': { type: 'percent', rate: 0.85 }, // 單次碼（85折）— 客戶使用後請刪除或註解掉這一行
 };
 
 function isDiscountCodeActive(entry) {
