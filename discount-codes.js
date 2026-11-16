@@ -25,6 +25,7 @@ const DISCOUNT_CODES = {
   'happy2wedding': { type: 'percent', rate: 0.9 },
   'yuto': { type: 'percent', rate: 0.9, startDate: '2026-11-09', endDate: '2026-11-16' },
   'moon': { type: 'percent', rate: 0.9, startDate: '2026-11-24', endDate: '2026-12-01' },
+  'moonmoon': { type: 'percent', rate: 0.9 },
   'ourtime': { type: 'percent', rate: 0.9, startDate: '2026-08-25', endDateTime: '2026-09-02T12:59:00' },
   'hanguan': { type: 'percent', rate: 0.9, startDate: '2026-09-09', endDate: '2026-09-17' },
   'starmijan': { type: 'percent', rate: 0.9, endDate: '2026-09-24' },
